@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .custom-link {
+            border-bottom: 3px solid transparent;
+        }
+
+        .custom-link:hover {
+            border-bottom: 3px solid #fbf8f8;
+        }
+
+        .custom-link:active {
+            border-bottom: 3px solid #fbf8f8;
+        }
+
+        
+        .carousel .carousel-item{
+            height: 300px;
+        }
+
+        .carousel-item img {
+            position: absolute;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            min-height: 300px;
+        }
+
+        .hero {
+            background-color:   #aaa;
+            object-fit: cover;
+        }
+
+        .footer {
+            background-color:   #aaa;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container-fluid m-0 p-0">
+        <!-- navbar -->
+        <nav class="navbar bg-dark navbar-expand-sm bg-body-tertiary" data-bs-theme="dark">
+            <div class="container">
+              <a class="navbar-brand" href="#">
+                <!-- <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+                Bootstrap
+              </a>
+
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item">
+                    <a class="nav-link custom-link" aria-current="page" href="bootstrap_layout_1.html">Home</a>
+                  </li>
+                  <li class="nav-item custom-link">
+                    <a class="nav-link" href="#">About us</a>
+                  </li>
+                  <li class="nav-item custom-link">
+                    <a class="nav-link" href="#">Contact us</a>
+                  </li>
+                </ul>
+
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+
+        <!-- hero sectioin -->
+        <!-- <div class="container-fluid m-o p-0 bg-light-subtle d-flex justify-content-center h-25 p-25"> -->
+            <!-- <header class="hero text-white d-flex  align-item-center" > -->
+            <header class="hero text-white d-flex" >
+
+                <!-- <div class="container d-flex justify-content-center align-self-center"> -->
+                <div class="container" style="width: 100%; overflow: hidden;">
+                    <!-- <h1 class="fw-bolder align-self-center">Banner</h1> -->
+                    <img src="banner-1544x500.png" alt="" style="object-fit: cover; height: 100%; width: 100%;">
+                </div>
+            </header>
+
+        <!-- cards -->
+        <div class="container-fluid mt-5 bg-light-subtle d-flex  justify-content-evenly">
+            <div class="card" style="width: 18rem;">
+                <img src="image_1.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="image_1.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="image_1.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="image_1.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- carasoul slider -->
+        <div class="container-fluid mt-5 mb-5 d-flex justify-content-center" >
+            <div id="carouselExampleCaptions" class="carousel slide" style="width: 90%;">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="image_1.jpeg" class="d-block w-100 h-50" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>First slide label</h5>
+                      <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="image_1.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Second slide label</h5>
+                      <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="image_1.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Third slide label</h5>
+                      <p>Some representative placeholder content for the third slide.</p>
+                    </div>  
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+
+        <!-- contact form -->
+        <div class="container-fluid d-flex flex-column justify-content-evenly mb-5" style="width: 30%;">
+            <div class="mb-3">
+                <h1>Get in touch</h1>
+            </div>
+            <div>
+                <form class="row g-3">
+                    <div class="col-md-12">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" >
+                      </div>
+                    <div class="col-md-12">
+                        <label  class="form-label">Email</label>
+                        <input type="email" class="form-control" >
+                    </div>
+                    <div class="col-md-12">
+                        <label  class="form-label">Phone</label>
+                        <input type="phone" class="form-control" placeholder="">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="nessage">Message</label>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 70px;"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Send email</button>
+                    </div>
+              </form>
+            </div>
+        </div>
+        <!-- footer -->
+        <div class="mt-5 p-4 footer text-black text-center">
+            <p>&copy copyright</p>
+        </div>
+        
+    </div>
+</body>
+</html>

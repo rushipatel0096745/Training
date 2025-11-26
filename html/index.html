@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.main{
+            text-align: center;
+        }
+
+        div pre {
+            white-space: pre-line;
+        }
+
+        #div1, #div2 {
+            width: 350px;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+            margin: 20px;
+        }
+
+        .div3 {
+            display: flex;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="/style.css">
+
+
+</head>
+<body>
+    <div class="main">
+        <h1 style="font-size: 60px;">this is the first heading</h1>
+
+        <a href="https://www.google.com" target="_blank" style="margin: 10px;">Google</a>
+
+        <br>
+
+        <div style="text-align: center; margin-top: 20px;">
+
+            <!-- <picture>
+                <source media="(min-width: 650px)" srcset="/image_1.jpg">
+                <source media="(min-width: 465px)" srcset="/image_2.jpg">
+
+                <img src="866-536x354.jpg" title="this is example image" alt="example image" height="200" width="200">
+            </picture> -->
+
+
+            <img src="866-536x354.jpg" title="this is example image" alt="example image" height="200" width="200" id="img">
+
+
+            <p style="color: #190909; font-size: 25px; " >this is example image</p>
+        </div>
+
+
+        <div>
+            <pre>
+                <i>
+                    Written by John Doe. 
+                    Visit us at:
+                    Example.com
+                    Box 564, Disneyland
+                    USA
+                </i>
+            </pre>
+
+            <address style="text-align: center;">
+                Written by John Doe.<br> 
+                Visit us at:<br>
+                Example.com<br>
+                Box 564, Disneyland<br>
+                USA
+            </address>
+        </div>
+
+       <button class="btn"><a href="#img">Go to the image</a></button>
+
+
+    <div class="div3">
+        <div id="div1" ondrop="ondropHandler(event)" ondragover="dragoverHandler(event)">
+            <img src="image_1.jpeg" alt="img" draggable="true" id="image_1" ondragstart="dragStartHandler(event)">
+       </div>
+
+       <div id="div2" ondrop="ondropHandler(event)" ondragover="dragoverHandler(event)"></div>
+
+    </div>
+       
+    </div>
+
+
+</body>
+
+<script>
+    function dragStartHandler(ev){
+        ev.dataTransfer.setData('img', ev.target.id);
+    }
+
+    function dragoverHandler(ev){
+        ev.preventDefault();
+    }
+
+    function ondropHandler(ev){
+        ev.preventDefault();
+        const data = ev.dataTransfer.getData('img');
+        ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+</html>

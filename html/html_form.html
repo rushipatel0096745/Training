@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+           display: flex;
+           justify-content: center;
+           margin-top: 50px;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            display: block;
+            margin-top: 5px;
+        }
+        input.invalid {
+            border: 1px solid red;
+        }
+        p{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <form name="myForm" onsubmit="submitHandler(event)">
+
+            <label for="name">Name</label><br>
+            <input type="text" id="name"><br>
+            <p id="nameErr"></p><br>
+
+            <label for="dob">Date of Birth</label><br>
+            <input type="date" name="dob" id="dob"><br><br>
+            <p id="dobErr"></p><br>
+
+
+            <label for="email">Email</label><br>
+            <input type="text" name="email" id="email"><br>
+            <p id="emailErr"></p><br>
+
+
+            <label for="address">Address</label><br>
+            <textarea name="address" id="address" cols="15" rows="3"></textarea><br>
+            <p id="addressErr"></p><br>
+
+            <label for="mobile">Phone no.</label><br>
+            <input type="text" id="mob"><br>
+            <p id="mobErr"></p><br>
+
+
+            <!-- radiobuttons -->
+            <label for="gender">Gender</label><br>
+            <input type="radio" name="gender" id="male" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" name="gender" id="female" value="female">
+            <label for="female">Female</label><br>
+            <p id="genderErr"></p><br>
+
+
+            <!-- selective fields -->
+            <label for="education">Education</label>
+            <select name="education" id="education">
+                <option value="" disabled selected>Select your education level</option> 
+                <option value="be">BE</option>
+                <option value="bsc">BSc</option>
+                <option value="bcom">BCom</option>
+                <option value="arts">Arts</option>
+            </select><br>
+            <p id="eduErr"></p><br>
+
+
+
+            <label>Hobby</label><br>
+            <input type="checkbox" name="hobby" value="Cricket" id="cricket">
+            <label for="cricket">Cricket</label><br>
+
+            <input type="checkbox" name="hobby" value="Travelling" id="travelling">
+            <label for="travelling">Travelling</label><br>
+
+            <input type="checkbox" name="hobby" value="Watching Tv" id="watchingtv">
+            <label for="watchingtv">Watching TV</label><br>
+            <p id="hobbyErr"></p><br>
+            <br>
+            <input type="checkbox" name="terms" id="terms">
+            <label for="terms">I agree to the terms</label>
+            <p id="termErr"></p>
+            <br>
+
+            <input type="submit" value="Submit" style="margin-bottom: 20px;">
+
+        </form>
+    </div>
+
+    <script src="form-validation.js"></script>
+
+
+</body>
+</html>
