@@ -16,16 +16,7 @@
         justify-content: center;
         margin-top: 50px;
       }
-      .error-message {
-        color: red;
-        font-size: 0.8em;
-        display: block;
-        margin-top: 5px;
-      }
-      input.invalid {
-        border: 1px solid red;
-      }
-      p {
+      .validation-error{
         color: red;
       }
     </style>
@@ -34,43 +25,55 @@
     <div class="container">
       <form name="myForm" onsubmit="submitHandler(event)">
         <label for="name">Name</label><br />
-        <input type="text" id="name" class="required" name="name"/><br />
-        <p id="nameErr"></p>
+        <input type="text" id="name" class="required" name="name" />
+        <div class="validation-error"></div>
+
         <br />
 
         <label for="dob">Date of Birth</label><br />
-        <input type="date" name="dob" id="dob" class="required"/><br /><br />
-        <p id="dobErr"></p>
+        <input type="date" name="dob" id="dob" class="required" />
+        <div class="validation-error"></div>
+
         <br />
 
         <label for="email">Email</label><br />
-        <input type="email" name="email" id="email"  class="required"/><br />
-        <p id="emailErr"></p>
+        <input type="email" name="email" id="email" class="required" />
+        <div class="validation-error"></div>
+
+
         <br />
 
         <label for="address">Address</label><br />
-        <textarea name="address" id="address" cols="15" rows="3" ></textarea
-        ><br />
-        <p id="addressErr"></p>
+        <textarea
+          name="address"
+          id="address"
+          cols="15"
+          rows="3"
+          class="required"
+        ></textarea>
+        <div class="validation-error"></div>
         <br />
 
-        <label for="mobile" >Phone no.</label><br />
-        <input type="tel" id="mob" name="phone" class="required"/><br />
-        <p id="mobErr"></p>
+        <br />
+
+        <label for="mobile">Phone no.</label><br />
+        <input type="tel" id="mob" name="phone" class="required" />
+        <div class="validation-error"></div>
+
         <br />
 
         <!-- radiobuttons -->
         <label for="gender">Gender</label><br />
-        <input type="radio" name="gender" id="male" value="male" class="required"/>
+        <input type="radio" name="gender" value="male" class="required" />
         <label for="male">Male</label><br />
-        <input type="radio" name="gender" id="female" value="female" class="required"/>
+        <input type="radio" name="gender" value="female" class="required" />
         <label for="female">Female</label><br />
-        <p id="genderErr"></p>
+
         <br />
 
         <!-- selective fields -->
         <label for="education">Education</label>
-        <select name="education" id="education" >
+        <select name="education" id="education" class="required">
           <option value="" disabled selected>
             Select your education level
           </option>
@@ -79,16 +82,23 @@
           <option value="bcom">BCom</option>
           <option value="arts">Arts</option></select
         ><br />
-        <p id="eduErr"></p>
-        <br />
 
-        <input type="submit" value="Submit" style="margin-bottom: 20px" />
+        
+        <label for="terms">I agree to the terms</label>
+        <input type="checkbox" name="terms" id="terms" class="required" />
+        <div class="validation-error"></div>
+
+        <br /><br />
+
+        <div style="text-align: center">
+          <input
+            type="submit"
+            name="submit"
+            value="Submit"
+            style="margin-bottom: 20px"
+          />
+        </div>
       </form>
-    </div>
-
-    
-    <div style="color: red; text-align: center;">
-      <p class="errors"></p>
     </div>
 
     <script src="form-validation.js"></script>
