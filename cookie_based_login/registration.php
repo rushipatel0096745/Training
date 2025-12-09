@@ -68,34 +68,42 @@
                     $mob = $_POST['mob'];
                 }
 
-                $user[] = [
-                    "email"=> $email,
-                    "password"=> $password,
-                    "name"=> $name
-                ];
-    
-                $user_data = json_encode($user); // converted to json
-                $checkCookie = isset($_COOKIE["users"]);
-    
-                if(!isset($_COOKIE["users"])){
-                    setcookie("users", $user_data);
-                }
-                else {
-                    $users_arr = json_decode($_COOKIE["users"], true); //gives users arr in php
-                    if($users_arr[$email] == $user[$email]){
-                        $errMsg = "User already exist";
-                    } else {
-                        $users_arr += $user; //updating user_arr in php
-                        setcookie("users", json_encode($users_arr), "/"); //set cookies after updated array which converted to json 
+
+                if($nameErr == "" and $mobErr == "" and $passwordErr == "" and $emailErr == ""){
+                    
+                    $user = [
+                        $email => $password
+                    ];
+                    
+                    if(!isset($_COOKIE["users"])){
+                        setcookie("users", json_encode($user), time()+300);
+                    }else{
+                        $existingUser = json_decode($_COOKIE["users"], true);
+
+                        foreach($existingUser as $k => $v) {
+                            if($k === $_POST["email"]) {
+                                $errMsg = "User already exist";
+                                break;
+                            }
+                        }
+
+                        if($errMsg == ""){
+                            $existingUser += $user;
+                            setcookie("users", json_encode($existingUser), time()+300);
+                        }
+
+
                     }
+                    
                 }
+                
                 
             }
             
 
 
             ?>
-        <?php echo "$checkCookie"; ?>
+        <?php // echo "var_dump($existingUser)"; ?>
         <form  method="post" action="<?php echo $_SERVER["PHP_SELF"];?>" onsubmit="return submitHandler(event)" >
             <label for="name">Name: </label>
             <input type="text" name="name" class="required"> <?php echo "$nameErr" ?> 

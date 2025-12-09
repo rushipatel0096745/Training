@@ -23,9 +23,9 @@
             $password = "";
 
 
-            function set_session_variables($k, $v){
-                $_SESSION[$k] = $v;
-            }
+            // function set_session_variables($k, $v){
+            //     $_SESSION[$k] = $v;
+            // }
 
             // name
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -47,11 +47,11 @@
                     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         $emailErr = "Invalid email format";
                     }
-                    else {
-                        // set_session_variables("email", $email);
-                        $_SESSION["email"] = $_POST["email"];
+                    // else {
+                    //     // set_session_variables("email", $email);
+                    //     $_SESSION["email"] = $_POST["email"];
 
-                    }
+                    // }
                 } 
                 //password
                 if(empty($_POST["password"])) {
@@ -60,7 +60,7 @@
                 else {
                     $password = $_POST['password'];
                     // set_session_variables("password", $_POST["password"]);
-                    $_SESSION["password"] = $_POST["password"];
+                    // $_SESSION["password"] = $_POST["password"];
                 }
                 // mobile
                 if(empty($_POST["mob"])){
@@ -68,6 +68,36 @@
                 }
                 else {
                     $mob = $_POST['mob'];
+                }
+
+                if($nameErr == "" and $mobErr == "" and $passwordErr == "" and $emailErr == ""){
+                    
+                    $user = [
+                        $email => $password
+                    ];
+                    
+                    if(!isset($_SESSION["users"])){
+                        // setcookie("users", json_encode($user), time()+300);
+                        $_SESSION["users"] = json_encode($user);
+                    }else{
+                        $existingUser = json_decode($_SESSION["users"], true);
+
+                        foreach($existingUser as $k => $v) {
+                            if($k === $_POST["email"]) {
+                                $errMsg = "User already exist";
+                                break;
+                            }
+                        }
+
+                        if($errMsg == ""){
+                            $existingUser += $user;
+                            // setcookie("users", json_encode($existingUser), time()+300);
+                            $_SESSION["users"] = json_encode($existingUser);
+                        }
+
+
+                    }
+                    
                 }
             }
 

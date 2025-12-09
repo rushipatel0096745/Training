@@ -28,7 +28,29 @@
         echo "$res";
     }
 
-
+  // $user = [
+                //     "email"=> $email,
+                //     "password"=> $password,
+                //     "name"=> $name
+                // ];
+    
+                // $user_data = json_encode($user); // converted to json
+                // $checkCookie = isset($_COOKIE["users"]);
+    
+                // if(!isset($_COOKIE["users"])){
+                //     setcookie("users", $user_data, time() + (60 * 5));
+                // }
+                // else {
+                //     $users_arr = json_decode($_COOKIE["users"], true); //gives users arr in php
+                //     $users_arr = $user; //updating user_arr in php
+                //     setcookie("users", json_encode($users_arr), time() + (60 * 5), "/"); //set cookies after updated array which converted to json 
+                //     // if($users_arr[$email] === $user[$email]){
+                //     //     $errMsg = "User already exist";
+                //     // } else {
+                //     //     $users_arr = $user; //updating user_arr in php
+                //     //     setcookie("users", json_encode($users_arr), time() + (60 * 5), "/"); //set cookies after updated array which converted to json 
+                //     // }
+                // }
 
 
 

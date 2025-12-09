@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    // var_dump($_SESSION);
+    var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,14 +14,17 @@
         $emailErr = $passwordErr = $loginErr = "";
         $email = $password = "";
 
-        function get_session_values($k){
-            return $_SESSION[$k];
-        }
+        // function get_session_values($k){
+        //     return $_SESSION[$k];
+        // }
 
-        $emailSession = get_session_values("email");
-        $passwordSession = get_session_values("password");
+        // $emailSession = get_session_values("email");
+        // $passwordSession = get_session_values("password");
         $flag = false;
         $text = "";
+
+        $users = json_decode($_SESSION["users"], true);
+
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // email
@@ -42,20 +45,37 @@
             else {
                 $password = $_POST["password"];
             }
-            if($_POST["email"] == $emailSession and $_POST["password"] == $passwordSession ){
-                $flag = true;
-                $text = "log in succesful";
+
+            foreach($users as $e => $p){
+                echo "$e => $p" . "<br>";
+                if($e === $email and $p === $password){
+                    $flag = true;
+                    break;
+                }
+                else {
+                    $flag = false;
+                    $text = "Incorrect email or password";
+                }
             }
-            else {
-                $flag = false;
-                $text = "Incorrect email or password";
-            }
+
+
             if($flag == true){
                 header("Location: profile.php"); 
                 $text = "";
                 exit;
             }
         }
+
+
+
+            // if($_POST["email"] == $emailSession and $_POST["password"] == $passwordSession ){
+            //     $flag = true;
+            //     $text = "log in succesful";
+            // }
+            // else {
+            //     $flag = false;
+            //     $text = "Incorrect email or password";
+            // }
 
     ?>
     

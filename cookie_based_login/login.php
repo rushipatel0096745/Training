@@ -10,14 +10,17 @@
         $emailErr = $passwordErr = $loginErr = "";
         $email = $password = "";
 
-        function get_cookies($k){
-            return $_COOKIE[$k];
-        }
+        // function get_cookies($k){
+        //     return $_COOKIE[$k];
+        // }
 
-        $emailCookie = get_cookies("email");
-        $passwordCookie = get_cookies("password");
+        // $emailCookie = get_cookies("email");
+        // $passwordCookie = get_cookies("password");
         $flag = false;
         $text = "";
+
+        $users = json_decode($_COOKIE["users"], true);
+
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // email
@@ -38,14 +41,19 @@
             else {
                 $password = $_POST["password"];
             }
-            if($_POST["email"] == $emailCookie and $_POST["password"] == $passwordCookie ){
-                $flag = true;
-                $text = "log in succesful";
+
+            foreach($users as $e => $p){
+                echo "$e => $p" . "<br>";
+                if($e === $email and $p === $password){
+                    $flag = true;
+                    break;
+                }
+                else {
+                    $flag = false;
+                    $text = "Incorrect email or password";
+                }
             }
-            else {
-                $flag = false;
-                $text = "Incorrect email or password";
-            }
+
             if($flag == true){
                 header("Location: profile.php"); 
                 $text = "";
@@ -53,6 +61,15 @@
             }
         }
 
+
+            // if($_POST["email"] == $emailCookie and $_POST["password"] == $passwordCookie ){
+            //     $flag = true;
+            //     $text = "log in succesful";
+            // }
+            // else {
+            //     $flag = false;
+            //     $text = "Incorrect email or password";
+            // }
     ?>
     
     <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post" onsubmit="return submitHandler(event)">

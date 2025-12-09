@@ -33,7 +33,20 @@
         }
     }
    
+    $arr = [
+        "email1@gmail.com"=>"password1",
+        "email2@gmail.com" => "password2"
+    ];
+    $arr2 = [
+        "email3@gmail.com"=>"password3",
+        "email4@gmail.com" => "password4"
+    ];
+
+    $arr += $arr2;
+    $result = json_encode($arr);
+    echo "$result";
    
+
        
     ?> 
 </body>
