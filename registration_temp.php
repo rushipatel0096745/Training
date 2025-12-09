@@ -18,6 +18,8 @@
             $mob = "";
             $password = "";
             $errMsg = "";
+            $existingUser = [];
+
 
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -53,7 +55,6 @@
                     $mob = $_POST['mob'];
                 }
 
-                $existingUser = [];
                 if($nameErr == "" and $mobErr == "" and $passwordErr == "" and $emailErr == ""){
                     
                     $user = [
@@ -73,8 +74,8 @@
                         //         break;
                         //     }
                         // }
-                        foreach ($existingUser as $user){
-                            foreach($user as $k => $v){
+                        foreach ($existingUser as $item){
+                            foreach($item as $k => $v){
                                 if($k === $_POST["email"]){
                                     $errMsg = "User already exist";
                                     break;
@@ -83,7 +84,11 @@
                         }
 
                         if($errMsg == ""){
-                            $existingUser[] = $user;
+                            $existingUser[] = [
+                                "email" => $email,
+                                "password" => $password,
+                                "name" => $name
+                            ];
                             setcookie("users1", json_encode($existingUser), time()+300);
                         }
 
