@@ -42,10 +42,44 @@
                 $password = $_POST["password"];
             }
 
+                // foreach($users as $e => $p){
+                //     echo "$e => $p" . "<br>";
+                //     if($e === $email and $p === $password){
+                //         $flag = true;
+                //         break;
+                //     }
+                //     else {
+                //         $flag = false;
+                //         $text = "Incorrect email or password";
+                //     }
+                // }
+
+               // $userArr = [
+                    //     "a@gmail.com" => [
+                    //         "name" => "a",
+                    //         "mob" => "moba",
+                    //         "pass" => "passa"
+                    //     ],
+                    //     "b@gmail.com" => [
+                    //         "name" => "b",
+                    //         "mob" => "mobb",
+                    //         "pass" => "passb"
+                    //     ]
+                    // ];
+
+            
             foreach($users as $e => $p){
-                echo "$e => $p" . "<br>";
-                if($e === $email and $p === $password){
+                if($e === $email and $p["password"] === $password){
                     $flag = true;
+                    $user = [
+                        $email => [
+                            "name" => $p["name"],
+                            "mob" => $p["mob"],
+                            "password" => $p["password"],
+                            "email" => $p["email"]
+                        ]
+                    ];
+                    setcookie("login_user", json_encode($user), time()+60);
                     break;
                 }
                 else {
@@ -60,16 +94,7 @@
                 exit;
             }
         }
-
-
-            // if($_POST["email"] == $emailCookie and $_POST["password"] == $passwordCookie ){
-            //     $flag = true;
-            //     $text = "log in succesful";
-            // }
-            // else {
-            //     $flag = false;
-            //     $text = "Incorrect email or password";
-            // }
+        
     ?>
     
     <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post" onsubmit="return submitHandler(event)">

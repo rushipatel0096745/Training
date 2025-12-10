@@ -18,23 +18,17 @@
             $mob = "";
             $password = "";
             $errMsg = "";
-
-            // function set_cookies($k, $v){
-            //     setrawcookie($k, $v);
-            // }
-
-            // setcookie("users", "", time()-3600);
+            $existingUser = [];
 
 
-            // name
+
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // name
                 if (empty($_POST["name"])) {
                     $nameErr = "Name is required";
                 } else {
                     $name = $_POST["name"];
-                }
-                
+                }               
                 // email
                 if (empty($_POST["email"])) {
                     $emailErr = "Email is required";
@@ -44,12 +38,7 @@
                     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         $emailErr = "Invalid email format";
                     }
-                    // else {
-                    //     // set_cookies("email", $email);
-                    //     // $users += ["email" => $_POST["email"]];
-                    // }
                 } 
-                
                 //password
                 if(empty($_POST["password"])) {
                     $passwordErr = "password is required";
@@ -66,48 +55,45 @@
                     $mob = $_POST['mob'];
                 }
 
-
                 if($nameErr == "" and $mobErr == "" and $passwordErr == "" and $emailErr == ""){
-
+                    
                     $user = [
-                        $email => [
-                            "name" => $name,
-                            "mob" => $mob,
-                            "password" => $password,
-                            "email" => $email
-                        ]
+                        "email" => $email,
+                        "password" => $password,
+                        "name" => $name
                     ];
                     
-                    if(!isset($_COOKIE["users"])){
-                        setcookie("users", json_encode($user), time()+300);
+                    if(!isset($_COOKIE["users1"])){
+                        setcookie("users1", json_encode([$user]), time()+300);
                     }else{
-                        $existingUser = json_decode($_COOKIE["users"], true);
+                        $existingUser = json_decode($_COOKIE["users1"], true);
 
-                        foreach($existingUser as $k => $v) {
-                            if($k === $_POST["email"]) {
-                                $errMsg = "User already exist";
-                                break;
-                            } else {
-                                $errMsg = "";
+                        foreach ($existingUser as $item){
+                                if($item["email"] === $email){
+                                    $errMsg = "User already exist";
+                                    break;
+                                } else {
+                                    $errMsg = "";
+                                }
                             }
                         }
 
                         if($errMsg == ""){
-                            $existingUser += $user;
-                            setcookie("users", json_encode($existingUser), time()+300);
+                            $existingUser[] = [
+                                "email" => $email,
+                                "password" => $password,
+                                "name" => $name
+                            ];
+                            setcookie("users1", json_encode($existingUser), time()+300);
                         }
 
                     }
                     
                 }
-                
-                
-            }
+               
             
-
-
             ?>
-        <?php // echo "var_dump($existingUser)"; ?>
+
         <form  method="post" action="<?php echo $_SERVER["PHP_SELF"];?>" onsubmit="return submitHandler(event)" >
             <label for="name">Name: </label>
             <input type="text" name="name" class="required"> <?php echo "$nameErr" ?> 
@@ -128,7 +114,6 @@
             <div class="validation-error"></div> <br>
 
             <?php echo "$errMsg"; ?>
-
 
             <input type="submit" value="submit">
 
