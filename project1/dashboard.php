@@ -1,21 +1,14 @@
 <?php  
-    session_start();
-    if(!isset($_SESSION["admin"])){
-        header("Location: login.php");
-        exit();
-    }
+    // session_start();
+    // if(!isset($_SESSION["admin"])){
+    //     header("Location: login.php");
+    //     exit();
+    // }
 
 ?>
 
 <?php 
-    include '../database/db_connect.php';
-    // include './add_user.php';
-
-    // $all_users_sql = "SELECT * FROM users";
-    // $all_users_stmt = $conn->prepare($all_users_sql);
-    // $all_users_stmt->execute();
-
-    // $all_users = $all_users_stmt->fetchAll(PDO::FETCH_ASSOC);
+    include './database/db_connect.php';
 
     $all_admin_users_sql = "SELECT a.admin_id AS admin_id, a.name AS name, a.email AS email, r.role_name AS role FROM admin a JOIN roles r ON a.role_id = r.role_id";
     $all_admin_users_stmt = $conn->prepare($all_admin_users_sql);

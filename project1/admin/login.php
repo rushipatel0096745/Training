@@ -6,6 +6,8 @@
     $email = $_POST["email"];
     $password = $_POST["password"];
 
+    // $verify_password = password_verify()
+
     $sql = "SELECT admin_id from admin WHERE email = :email AND password_hash = :password";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":email", $email);
@@ -20,12 +22,7 @@
     } else {
         echo "Incorrect Email or Passoword";
     }
-
-
-
-
-
-
+    // $conn = null;
 ?>
 
 
