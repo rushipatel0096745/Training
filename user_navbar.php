@@ -70,7 +70,104 @@ function renderNavigation($items, $is_dropdown = false)
 $navItems = fetchNavigationItems($conn);
 $navTree = buildTree($navItems);
 
+
+$stmt = $conn->query($cteQuery);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+function buildTreeFromCTE($rows) {
+    $map = [];
+    $tree = [];
+
+    foreach ($rows as $row) {
+        $row['children'] = [];
+        $map[$row['id']] = $row;
+    }
+
+    foreach ($map as $id => &$node) {
+        if ($node['parent_id'] == 0) {
+            $tree[] = &$node;
+        } else {
+            $map[$node['parent_id']]['children'][] = &$node;
+        }
+    }
+
+    return $tree;
+}
+
+$navTree = buildTreeFromCTE($rows);
+
+function renderNavigation($items, $isDropdown = false) {
+    if (!$items) return '';
+
+    $ulClass = $isDropdown ? 'dropdown-menu' : 'navbar-nav';
+    $html = "<ul class='$ulClass'>";
+
+    foreach ($items as $item) {
+        $hasChildren = !empty($item['children']);
+
+        if ($hasChildren) {
+            $liClass   = $isDropdown ? 'dropdown-submenu' : 'nav-item dropdown';
+            $linkClass = $isDropdown ? 'dropdown-item dropdown-toggle' : 'nav-link dropdown-toggle';
+
+            $html .= "<li class='$liClass'>";
+            $html .= "<a href='#' class='$linkClass' data-bs-toggle='dropdown'>";
+            $html .= htmlspecialchars($item['name']);
+            $html .= "</a>";
+            $html .= renderNavigation($item['children'], true);
+            $html .= "</li>";
+        } else {
+            $itemClass = $isDropdown ? 'dropdown-item' : 'nav-link';
+
+            $html .= "<li class='" . ($isDropdown ? '' : 'nav-item') . "'>";
+            $html .= "<a class='$itemClass' href='{$item['url']}'>";
+            $html .= htmlspecialchars($item['name']);
+            $html .= "</a>";
+            $html .= "</li>";
+        }
+    }
+
+    $html .= "</ul>";
+    return $html;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">MySite</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <?php echo renderNavigation($navTree); ?>
+    </div>
+
+  </div>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-left: .1rem;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+
 ?>
+
+
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
